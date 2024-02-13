@@ -1,13 +1,13 @@
-
+import { Toaster } from "sonner";
 import { Inter } from 'next/font/google'
 import type { Metadata } from 'next'
 
-import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { ConvexClientProvider } from '@/components/providers/convex-provider'
+import { ModalProvider } from "@/components/providers/modal-provider";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 import './globals.css'
-import { ModalProvider } from '@/components/providers/modal-provider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -39,6 +39,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ConvexClientProvider>
+          <EdgeStoreProvider>
             <ThemeProvider
               attribute="class"
               defaultTheme="system"
@@ -46,10 +47,11 @@ export default function RootLayout({
               disableTransitionOnChange
               storageKey="jotion-theme-2"
             >
-              <Toaster position='bottom-center'/>
+              <Toaster position="bottom-center" />
               <ModalProvider />
               {children}
             </ThemeProvider>
+          </EdgeStoreProvider>
         </ConvexClientProvider>
       </body>
     </html>
