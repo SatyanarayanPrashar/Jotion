@@ -25,11 +25,23 @@ const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
     return response.url;
   }
 
+  type BSchema = {
+      // Define properties and structure for block-level content
+  };
+
+  type I = {
+      // Define properties and structure for inline content
+  };
+
+  type S = {
+      // Define properties and structure for styling options
+  };
+
   const editor: BlockNoteEditor = useBlockNote({
     editable,
     initialContent: 
       initialContent 
-      ? JSON.parse(initialContent) as PartialBlock[] //changed
+      ? JSON.parse(initialContent) as PartialBlock<BSchema, I, S>[]
       : undefined,
 
     onEditorContentChange: (editor) => {
