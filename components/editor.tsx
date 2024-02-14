@@ -29,7 +29,7 @@ const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
     editable,
     initialContent: 
       initialContent 
-      ? JSON.parse(initialContent) as PartialBlock[] 
+      ? JSON.parse(initialContent) as PartialBlock[] //changed
       : undefined,
 
     onEditorContentChange: (editor) => {
