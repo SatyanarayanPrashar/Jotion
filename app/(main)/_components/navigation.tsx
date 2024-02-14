@@ -9,6 +9,7 @@ import { useMediaQuery } from "usehooks-ts";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
+import { useRouter } from "next/navigation";
 import { UserItem } from "./user-items";
 import { Item } from "./item";
 import { toast } from "sonner";
@@ -19,6 +20,7 @@ import { useSettings } from "@/hooks/use-settings";
 import { Navbar } from "./navbar";
 
 export const Navigation = () => {
+    const router = useRouter();
     const search = useSearch();
     const settings = useSettings();
     const params = useParams();
@@ -108,7 +110,8 @@ export const Navigation = () => {
       }
     
       const handleCreate = () => {
-        const promise = create({ title: "Untitled" });
+        const promise = create({ title: "Untitled" })
+            .then((documentId) => router.push(`/documents/${documentId}`));
 
         toast.promise(promise, {
             loading: "Creating a new note...",
